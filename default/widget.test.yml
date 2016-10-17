@@ -1,0 +1,5 @@
+server: localhost
+database: openchart
+user_name: openchart
+password: 1234
+sql: "select * from oc_layout where name = 'Home';"
