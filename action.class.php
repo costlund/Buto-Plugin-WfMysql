@@ -12,13 +12,6 @@ class PluginWfMysql{
   <p>
   A widget to test your MySql database.
   </p>
-  #code-yml#
-  server: localhost
-  database: openchart
-  user_name: openchart
-  password: 1234
-  sql: "select * from oc_layout where name = 'Home';"
-  #code#
   */
   public static function widget_test($data){
     $mysql = new PluginWfMysql();
@@ -44,7 +37,7 @@ class PluginWfMysql{
    * @param type $sql
    * @return array
    */
-  public function runSql($sql){
+  public function runSql($sql, $key_field = 'id'){
     $array = array();
     $num_rows = null;
     $result = $this->db_handler->query($sql);
@@ -52,8 +45,8 @@ class PluginWfMysql{
       if (isset($result->num_rows) && $result->num_rows > 0) {
         $num_rows = $result->num_rows;
         while($row = $result->fetch_assoc()) {
-          if(isset($row['id'])){
-            $array[$row['id']] = $row;
+          if($key_field && isset($row[$key_field])){
+            $array[$row[$key_field]] = $row;
           }else{
             $array[] = $row;
           }
