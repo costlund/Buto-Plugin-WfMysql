@@ -103,6 +103,17 @@ class PluginWfMysql{
     return true;
   }
   /**
+   * Get last insert id.
+   */
+  public function getLastInsertId(){
+    $record = $this->runSql("SELECT LAST_INSERT_ID() AS id;", null);
+    if($record['num_rows']==1){
+      return $record['data'][0]['id'];
+    }else{
+      return null;
+    }
+  }
+  /**
    * 
    * @return type
    */
