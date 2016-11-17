@@ -88,7 +88,7 @@ class PluginWfMysql{
     if(isset($data['params'])){
       $types = '';
       foreach ($data['params'] as $key => $value) {
-        if(!isset($value['type']) || !isset($value['value'])){ return false; }
+        if(!isset($value['type']) || !isset($value['value']) && $value['value'] != null ){ exit('Error in params for PluginWfMysql.'); }
         $types .= $value['type'];
       }
       $eval = '$stmt->bind_param("'.$types.'"';
@@ -96,11 +96,12 @@ class PluginWfMysql{
         $eval .= ', $data["params"]["'.$key.'"]["value"]';
       }
       $eval .= ');';
+//      wfHelp::yml_dump(array($data, $eval));
       eval($eval);
     }
-    $stmt->execute();
+    $bool = $stmt->execute();
     $this->stmt = $stmt;
-    return true;
+    return $bool;
   }
   /**
    * Get last insert id.
@@ -121,6 +122,9 @@ class PluginWfMysql{
     $stmt = $this->stmt;
     $data = $this->data;
     if(isset($data['select'])){
+      /**
+       * Bind result to variables.
+       */
       $eval = '$stmt->bind_result(';
       foreach ($data['select'] as $key => $value) {
         $eval .= '$result["'.$value.'"],';
@@ -128,10 +132,12 @@ class PluginWfMysql{
       $eval = substr($eval, 0, strlen($eval)-1);
       $eval .= ');';
       eval($eval);
+      /**
+       * Fetch into array.
+       */
       $array = array();
       while($row = $stmt->fetch()) {
         $temp = array();
-        //foreach ($data['select'] as $key => $value) {
         foreach ($result as $key => $value) {
           $temp[$key] = $value;
         }
