@@ -30,6 +30,7 @@ class PluginWfMysql{
    * Get db object.
    */
   public function open($conn) {
+    $conn = wfSettings::getSettingsFromYmlString($conn);
     $db_handle = new mysqli($conn['server'], $conn['user_name'], $conn['password'], $conn['database']);
     if ($db_handle->connect_error) {
         die("PluginWfMysql failed: " . $conn->connect_error);
@@ -85,6 +86,9 @@ class PluginWfMysql{
     $this->data = $data;
     if(!isset($data['sql'])){return false;}
     $stmt = $this->db_handler->prepare($data['sql']);
+    if($stmt===false){
+      throw new Exception("Error in PluginWfMysql in method execute for sql: ".$data['sql']."!");
+    }
     if(isset($data['params'])){
       $types = '';
       foreach ($data['params'] as $key => $value) {
