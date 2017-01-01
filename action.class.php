@@ -109,6 +109,10 @@ class PluginWfMysql{
       eval($eval);
     }
     $bool = $stmt->execute();
+    if($stmt->error){
+      wfHelp::yml_dump($stmt->error);
+    }
+    
     $this->stmt = $stmt;
     return $bool;
   }
