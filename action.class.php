@@ -31,7 +31,12 @@ class PluginWfMysql{
    */
   public function open($conn) {
     $conn = wfSettings::getSettingsFromYmlString($conn);
-    $db_handle = new mysqli($conn['server'], $conn['user_name'], $conn['password'], $conn['database']);
+    $db_handle = new mysqli(
+            wfCrypt::decryptFromString($conn['server']), 
+            wfCrypt::decryptFromString($conn['user_name']), 
+            wfCrypt::decryptFromString($conn['password']), 
+            wfCrypt::decryptFromString($conn['database'])
+            );
     if ($db_handle->connect_error) {
         die("PluginWfMysql failed: " . $conn->connect_error);
     }
