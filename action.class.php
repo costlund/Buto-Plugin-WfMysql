@@ -97,7 +97,7 @@ class PluginWfMysql{
     if(isset($data['params'])){
       $types = '';
       foreach ($data['params'] as $key => $value) {
-        if(!isset($value['type']) || !isset($value['value']) && $value['value'] != null ){ exit('Error in params for PluginWfMysql.'); }
+        if(!isset($value['type']) || !isset($value['value']) && $value['value'] != null ){ exit("Error in params key $key for PluginWfMysql."); }
         $types .= $value['type'];
       }
       $eval = '$stmt->bind_param("'.$types.'"';
@@ -105,14 +105,9 @@ class PluginWfMysql{
         $eval .= ', $data["params"]["'.$key.'"]["value"]';
       }
       $eval .= ');';
-//      wfHelp::yml_dump(array($data, $eval));
       eval($eval);
     }
     $bool = $stmt->execute();
-    if($stmt->error){
-      wfHelp::yml_dump($stmt->error);
-    }
-    
     $this->stmt = $stmt;
     return $bool;
   }
