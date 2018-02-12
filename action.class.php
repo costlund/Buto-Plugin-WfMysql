@@ -47,7 +47,8 @@ class PluginWfMysql{
   /**
    * Run a query and return result in an array.
    * @param type $sql
-   * @return array
+   * @param type $key_field
+   * @return type
    */
   public function runSql($sql, $key_field = 'id'){
     $array = array();
@@ -95,6 +96,17 @@ class PluginWfMysql{
       throw new Exception("Error in PluginWfMysql in method execute for sql: ".$data['sql']."!");
     }
     if(isset($data['params'])){
+      /**
+       * If integer is empty string we set it to NULL.
+       */
+      foreach ($data['params'] as $key => $value) {
+        if($value['type']=='i' && $value['value'] == ''){
+          $data['params'][$key]['value'] = null;
+        }
+      }
+      /**
+       * 
+       */
       $types = '';
       foreach ($data['params'] as $key => $value) {
         if(!isset($value['type']) || !isset($value['value']) && $value['value'] != null ){ exit("Error in params key $key for PluginWfMysql."); }
