@@ -156,6 +156,14 @@ class PluginWfMysql{
       return array();
     }
   }
+  public function getStmtAsArrayOne(){
+    $stmt = $this->getStmtAsArray();
+    if(sizeof($stmt)>0){
+      return $stmt[0];
+    }else{
+      return null;
+    }
+  }
   /**
    * 
    * @return type
