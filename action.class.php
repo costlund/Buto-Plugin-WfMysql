@@ -91,6 +91,16 @@ class PluginWfMysql{
   public function execute($data){
     $this->data = $data;
     if(!isset($data['sql'])){return false;}
+    /**
+     * Replace [user_id].
+     */
+    if(strstr($data['sql'], '[user_id]')){
+      $user = wfUser::getSession();
+      $data['sql'] = str_replace('[user_id]', $user->get('user_id'), $data['sql']);
+    }
+    /**
+     * 
+     */
     $stmt = $this->db_handler->prepare($data['sql']);
     if($stmt===false){
       throw new Exception("Error in PluginWfMysql in method execute for sql: ".$data['sql']."!");
