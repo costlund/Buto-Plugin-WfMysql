@@ -30,18 +30,20 @@ class PluginWfMysql{
    * Get db object.
    */
   public function open($conn) {
-    $conn = wfSettings::getSettingsFromYmlString($conn);
-    $db_handle = new mysqli(
-            wfCrypt::decryptFromString($conn['server']), 
-            wfCrypt::decryptFromString($conn['user_name']), 
-            wfCrypt::decryptFromString($conn['password']), 
-            wfCrypt::decryptFromString($conn['database'])
-            );
-    if ($db_handle->connect_error) {
-        die("PluginWfMysql failed: " . $conn->connect_error);
+    if(is_null($this->db_handler)){
+      $conn = wfSettings::getSettingsFromYmlString($conn);
+      $db_handle = new mysqli(
+              wfCrypt::decryptFromString($conn['server']), 
+              wfCrypt::decryptFromString($conn['user_name']), 
+              wfCrypt::decryptFromString($conn['password']), 
+              wfCrypt::decryptFromString($conn['database'])
+              );
+      if ($db_handle->connect_error) {
+          die("PluginWfMysql failed: " . $conn->connect_error);
+      }
+      $this->db_handler = $db_handle;
+      $this->execute(array('sql' => "SET CHARACTER SET utf8"));
     }
-    $this->db_handler = $db_handle;
-    $this->execute(array('sql' => "SET CHARACTER SET utf8"));
     return true;
   }
   /**
@@ -97,6 +99,13 @@ class PluginWfMysql{
     if(strstr($data['sql'], '[user_id]')){
       $user = wfUser::getSession();
       $data['sql'] = str_replace('[user_id]', $user->get('user_id'), $data['sql']);
+    }
+    /**
+     * Replace [remote_addr].
+     */
+    if(strstr($data['sql'], '[remote_addr]')){
+      $server = new PluginWfArray($_SERVER);
+      $data['sql'] = str_replace('[remote_addr]', $server->get('REMOTE_ADDR'), $data['sql']);
     }
     /**
      * 
@@ -192,5 +201,11 @@ class PluginWfMysql{
    */
   public function getStmt(){
     return $this->stmt;
+  }
+  public function transaction_start(){
+    $this->db_handler->begin_transaction();
+  }
+  public function transaction_end(){
+    $this->db_handler->commit();
   }
 }
