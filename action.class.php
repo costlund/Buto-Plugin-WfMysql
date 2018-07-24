@@ -116,10 +116,10 @@ class PluginWfMysql{
     }
     if(isset($data['params'])){
       /**
-       * If integer is empty string we set it to NULL.
+       * All empty strings sets to NULL.
        */
       foreach ($data['params'] as $key => $value) {
-        if($value['type']=='i' && $value['value'] == ''){
+        if($value['value'] == ''){
           $data['params'][$key]['value'] = null;
         }
       }
