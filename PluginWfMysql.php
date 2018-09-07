@@ -101,6 +101,18 @@ class PluginWfMysql{
       $data['sql'] = str_replace('[user_id]', $user->get('user_id'), $data['sql']);
     }
     /**
+     * Replace all session variables.
+     */
+    if(strstr($data['sql'], '[SESSION:')){
+      wfPlugin::includeonce('wf/arraysearch');
+      $search = new PluginWfArraysearch(true);
+      $session = wfUser::getSession();
+      $search->data = array('data' => $session->get());
+      foreach ($search->get() as $key => $value) {
+        $data['sql'] = str_replace('[SESSION:'.substr($value, 1).']', $session->get(substr($value, 1)), $data['sql']);
+      }
+    }
+    /**
      * Replace [remote_addr].
      */
     if(strstr($data['sql'], '[remote_addr]')){
