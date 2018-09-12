@@ -113,6 +113,21 @@ class PluginWfMysql{
       }
     }
     /**
+     * Set get parameters.
+     * Example when post id:
+      params:
+        -
+          type: s
+          value: get:id
+     */
+    if(isset($data['params'])){
+      foreach ($data['params'] as $key => $value) {
+        if(substr($value['value'], 0, 4) == 'get:'){
+          $data['params'][$key]['value'] = wfRequest::get(substr($value['value'], 4));
+        }
+      }
+    }
+    /**
      * Replace [remote_addr].
      */
     if(strstr($data['sql'], '[remote_addr]')){
