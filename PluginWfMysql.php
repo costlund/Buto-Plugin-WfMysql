@@ -14,6 +14,7 @@ class PluginWfMysql{
   private $db_handler = null;
   private $stmt = null;
   private $data = array();
+  public $settings = array('empty_strings_sets_to' => true);
   /**
   <p>
   A widget to test your MySql database.
@@ -145,9 +146,11 @@ class PluginWfMysql{
       /**
        * All empty strings sets to NULL.
        */
-      foreach ($data['params'] as $key => $value) {
-        if($value['value'] == ''){
-          $data['params'][$key]['value'] = null;
+      if($this->settings['empty_strings_sets_to']){
+        foreach ($data['params'] as $key => $value) {
+          if($value['value'] == ''){
+            $data['params'][$key]['value'] = null;
+          }
         }
       }
       /**
