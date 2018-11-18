@@ -1,0 +1,13 @@
+version: '1.1'
+plugin:
+  -
+    name: wf/arraysearch
+    version: '1.0'
+sys:
+  -
+    name: mercury
+    version:
+      - '1.0'
+php:
+  - 7.0.10
+ 
