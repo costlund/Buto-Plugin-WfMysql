@@ -40,7 +40,7 @@ class PluginWfMysql{
               wfCrypt::decryptFromString($conn['database'])
               );
       if ($db_handle->connect_error) {
-          die("PluginWfMysql failed: " . $conn->connect_error);
+        throw new Exception("PluginWfMysql could not connect to database.");
       }
       $this->db_handler = $db_handle;
       $this->execute(array('sql' => "SET CHARACTER SET utf8"));
