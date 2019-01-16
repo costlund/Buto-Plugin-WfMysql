@@ -140,7 +140,7 @@ class PluginWfMysql{
      */
     $stmt = $this->db_handler->prepare($data['sql']);
     if($stmt===false){
-      throw new Exception("Error in PluginWfMysql in method execute for sql: ".$data['sql']."!");
+      throw new Exception("PluginWfMysql says: ".$this->db_handler->error." (---".$data['sql']."---)!");
     }
     if(isset($data['params'])){
       /**
