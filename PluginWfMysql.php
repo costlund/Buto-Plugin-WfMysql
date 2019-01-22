@@ -184,6 +184,36 @@ class PluginWfMysql{
     }
   }
   /**
+   * Get sql script where params are parsed.
+   * @return string
+   */
+  public function getSqlScript(){
+    wfPlugin::includeonce('wf/array');
+    $data = new PluginWfArray($this->data);
+    $sql = $data->get('sql');
+    $params = $data->get('params');
+    if($params){
+      foreach ($params as $key => $value) {
+        if($value['type']=='s'){
+          $sql = $this->str_replace_first('?', "'".$value['value']."'", $sql);
+        }else{
+          $sql = $this->str_replace_first('?', $value['value'], $sql);
+        }
+      }
+    }
+    return $sql;
+  }
+  /**
+   * Replace first find character.
+   */
+  private function str_replace_first($search, $replace, $subject) {
+    $pos = strpos($subject, $search);
+    if ($pos !== false) {
+      return substr_replace($subject, $replace, $pos, strlen($search));
+    }
+    return $subject;
+  }  
+  /**
    * 
    * @return type
    */

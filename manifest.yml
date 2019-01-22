@@ -1,5 +1,8 @@
-version: '1.3'
+version: '1.4'
 history:
+  '1.4':
+    data: '2019-01-22'
+    description: 'New method to retrieve sql script where params are parsed.'
   '1.3':
     data: '2019-01-16'
     description: 'Improved error message.'
