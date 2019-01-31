@@ -92,7 +92,6 @@ class PluginWfMysql{
     );
    */
   public function execute($data){
-    $this->data = $data;
     if(!isset($data['sql'])){return false;}
     /**
      * Replace [user_id].
@@ -170,6 +169,7 @@ class PluginWfMysql{
     }
     $bool = $stmt->execute();
     $this->stmt = $stmt;
+    $this->data = $data;
     return $bool;
   }
   /**
@@ -197,6 +197,9 @@ class PluginWfMysql{
         if($value['type']=='s'){
           $sql = $this->str_replace_first('?', "'".$value['value']."'", $sql);
         }else{
+          if(!$value['value']){
+            $value['value'] = 'NULL';
+          }
           $sql = $this->str_replace_first('?', $value['value'], $sql);
         }
       }
