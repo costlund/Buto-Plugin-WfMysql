@@ -15,6 +15,7 @@ class PluginWfMysql{
   private $stmt = null;
   private $data = array();
   public $settings = array('empty_strings_sets_to_null' => true);
+  public $event = true;
   /**
   <p>
   A widget to test your MySql database.
@@ -170,6 +171,9 @@ class PluginWfMysql{
     $bool = $stmt->execute();
     $this->stmt = $stmt;
     $this->data = $data;
+    if($this->event){
+      wfEvent::run('wf_mysql_execute_after', array('sql_script' => $this->getSqlScript()));
+    }
     return $bool;
   }
   /**
