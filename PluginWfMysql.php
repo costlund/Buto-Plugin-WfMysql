@@ -169,6 +169,9 @@ class PluginWfMysql{
       eval($eval);
     }
     $bool = $stmt->execute();
+    if(!$bool){
+      throw new Exception("PluginWfMysql says: ".$this->db_handler->error." (---".$data['sql']."---)!");
+    }
     $this->stmt = $stmt;
     $this->data = $data;
     if($this->event){
