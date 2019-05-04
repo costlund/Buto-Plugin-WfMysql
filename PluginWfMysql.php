@@ -278,4 +278,10 @@ class PluginWfMysql{
   public function transaction_end(){
     $this->db_handler->commit();
   }
+  public function getMany(){
+    return $this->getStmtAsArray();
+  }
+  public function getOne(){
+    return new PluginWfArray($this->getStmtAsArrayOne());
+  }
 }

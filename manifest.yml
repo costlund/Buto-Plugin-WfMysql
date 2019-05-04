@@ -1,5 +1,8 @@
-version: '1.5'
+version: '1.6'
 history:
+  '1.6':
+    data: '2019-05-04'
+    description: 'Add methods getMany and getOne.'
   '1.5':
     data: '2019-02-26'
     description: 'Add event.'
@@ -19,7 +22,10 @@ history:
 plugin:
   -
     name: wf/arraysearch
-    version: '1.0'
+    version: '1.0.1'
+  -
+    name: wf/array
+    version: '1.0.1'
 sys:
   -
     name: mercury
