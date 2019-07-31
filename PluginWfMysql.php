@@ -281,7 +281,17 @@ class PluginWfMysql{
   public function getMany(){
     return $this->getStmtAsArray();
   }
-  public function getOne(){
-    return new PluginWfArray($this->getStmtAsArrayOne());
+  public function getOne($data = array()){
+    $data = new PluginWfArray($data);
+    $rs = $this->getStmtAsArrayOne();
+    if(is_null($rs) &&  $data->get('sql')){
+      $sql = new PluginWfArray($data->get('sql'));
+      $temp = array();
+      foreach ($sql->get('select') as $key => $value) {
+        $temp[$value] = null;
+      }
+      $rs = $temp;
+    }
+    return new PluginWfArray($rs);
   }
 }
