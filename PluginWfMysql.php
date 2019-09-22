@@ -129,6 +129,17 @@ class PluginWfMysql{
       }
     }
     /**
+     * If param type is i and value is on we set to 1.
+     * For usage when using a checkbox.
+     */
+    if(isset($data['params'])){
+      foreach ($data['params'] as $key => $value) {
+        if($value['type']=='i' && $value['value']=='on'){
+          $data['params'][$key]['value'] = 1;
+        }
+      }
+    }
+    /**
      * Replace [remote_addr].
      */
     if(strstr($data['sql'], '[remote_addr]')){
