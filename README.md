@@ -2,7 +2,7 @@
 Handle MySQL queries.
 
 ## SQL
-Example of query.
+Example of query to use in execute method.
 
 ```
 account_email:
@@ -30,6 +30,13 @@ wfEvent::run('wf_mysql_execute_after', array('sql_script' => $this->getSqlScript
 
 
 ## Metods
+
+### execute
+Execute sql. One could add params to replace data. The "get:" prefix will also be replaced by wfReguest params.
+
+```
+array('get' => array('id' => '1234'))
+```
 
 ### getOne
 Get one record as PluginWfArray object. Add optional sql data to fill result with empty params.

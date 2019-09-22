@@ -78,7 +78,8 @@ class PluginWfMysql{
   }
   /**
    * 
-   * @param type $data
+   * @param array $data
+   * @param array $params, array('rs' => array('name' => 'James'))
    * @return boolean
    * Example of array:
     $data = array(
@@ -92,8 +93,21 @@ class PluginWfMysql{
         )
     );
    */
-  public function execute($data){
+  public function execute($data, $params = array()){
+    /**
+     * 
+     */
     if(!isset($data['sql'])){return false;}
+    /**
+     * Replace data in $data from $params.
+     */
+    if(sizeof($params)){
+      $temp = new PluginWfArray($data);
+      foreach ($params as $key => $value) {
+        $temp->setByTag($value, $key);
+      }
+      $data = $temp->get();
+    }
     /**
      * Replace [user_id].
      */

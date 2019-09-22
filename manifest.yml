@@ -1,5 +1,11 @@
-version: '1.7'
+version: '1.9'
 history:
+  '1.9':
+    data: '2019-09-22'
+    description: 'Replace data in $data from $params.'
+  '1.8':
+    data: '2019-09-22'
+    description: 'Set on to 1 if type is i for better usage with checkboxes.'
   '1.7':
     data: '2019-07-31'
     description: 'Add optional param to method getOne.'
