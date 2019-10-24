@@ -99,6 +99,24 @@ class PluginWfMysql{
      */
     if(!isset($data['sql'])){return false;}
     /**
+     * Replace params type.
+     */
+    if(isset($data['params'])){
+      foreach ($data['params'] as $key => $value) {
+        if(strstr($data['params'][$key]['type'], 'varchar')){
+          $data['params'][$key]['type'] = 's';
+        }elseif(strstr($data['params'][$key]['type'], 'date')){
+          $data['params'][$key]['type'] = 's';
+        }elseif(strstr($data['params'][$key]['type'], 'timestamp')){
+          $data['params'][$key]['type'] = 's';
+        }elseif(strstr($data['params'][$key]['type'], 'int')){
+          $data['params'][$key]['type'] = 'i';
+        }elseif(strstr($data['params'][$key]['type'], 'double')){
+          $data['params'][$key]['type'] = 'd';
+        }
+      }
+    }
+    /**
      * Replace data in $data from $params.
      */
     if(sizeof($params)){
