@@ -107,6 +107,8 @@ class PluginWfMysql{
           $data['params'][$key]['type'] = 's';
         }elseif(strstr($data['params'][$key]['type'], 'date')){
           $data['params'][$key]['type'] = 's';
+        }elseif(strstr($data['params'][$key]['type'], 'enum')){
+          $data['params'][$key]['type'] = 's';
         }elseif(strstr($data['params'][$key]['type'], 'timestamp')){
           $data['params'][$key]['type'] = 's';
         }elseif(strstr($data['params'][$key]['type'], 'int')){
@@ -185,7 +187,7 @@ class PluginWfMysql{
     if($stmt===false){
       throw new Exception("PluginWfMysql says: ".$this->db_handler->error." (---".$data['sql']."---)!");
     }
-    if(isset($data['params'])){
+    if(isset($data['params']) && sizeof($data['params'])){
       /**
        * All empty strings sets to NULL.
        */
