@@ -72,7 +72,10 @@ class PluginWfMysql{
         $num_rows = 0;
       }
     }else{
-      die("PluginWfMysql failed: ". $this->db_handler->error);
+      if(!wfUser::hasRole('webmaster')){
+        $sql = 'empty sql string because role issue';
+      }
+      die("PluginWfMysql failed: ". $this->db_handler->error.' ('.$sql.')');
     }
     return array('num_rows' => $num_rows, 'data' => $array);
   }
