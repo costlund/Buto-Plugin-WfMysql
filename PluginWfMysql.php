@@ -108,6 +108,8 @@ class PluginWfMysql{
       foreach ($data['params'] as $key => $value) {
         if(strstr($data['params'][$key]['type'], 'varchar')){
           $data['params'][$key]['type'] = 's';
+        }elseif(strstr($data['params'][$key]['type'], 'text')){
+          $data['params'][$key]['type'] = 's';
         }elseif(strstr($data['params'][$key]['type'], 'date')){
           $data['params'][$key]['type'] = 's';
         }elseif(strstr($data['params'][$key]['type'], 'enum')){
