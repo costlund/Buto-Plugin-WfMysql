@@ -198,7 +198,7 @@ class PluginWfMysql{
        */
       if($this->settings['empty_strings_sets_to_null']){
         foreach ($data['params'] as $key => $value) {
-          if($value['value'] == ''){
+          if($value['value'] === ''){
             $data['params'][$key]['value'] = null;
           }
         }
@@ -254,7 +254,7 @@ class PluginWfMysql{
         if($value['type']=='s'){
           $sql = $this->str_replace_first('?', "'".$value['value']."'", $sql);
         }else{
-          if(!$value['value']){
+          if($value['value']===''){
             $value['value'] = 'NULL';
           }
           $sql = $this->str_replace_first('?', $value['value'], $sql);

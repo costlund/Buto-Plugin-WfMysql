@@ -1,5 +1,9 @@
-version: '1.10.2'
+version: '1.10.3'
 history:
+  '1.10.3':
+    data: '2019-12-17'
+    title: Param zero value
+    description: 'Bug when param values was set to NULL if zero.'
   '1.10.2':
     data: '2019-11-18'
     title: Params type
