@@ -50,9 +50,9 @@ class PluginWfMysql{
   }
   /**
    * Run a query and return result in an array.
-   * @param type $sql
-   * @param type $key_field
-   * @return type
+   * @param string $sql
+   * @param string $key_field
+   * @return array
    */
   public function runSql($sql, $key_field = 'id'){
     $array = array();
