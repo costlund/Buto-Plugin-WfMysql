@@ -328,8 +328,34 @@ class PluginWfMysql{
   public function transaction_end(){
     $this->db_handler->commit();
   }
-  public function getMany(){
-    return $this->getStmtAsArray();
+  public function getMany($data = array('keys' => array())){
+    /**
+     * 
+     */
+    $data = new PluginWfArray($data);
+    /**
+     * 
+     */
+    $rs =  $this->getStmtAsArray();
+    /**
+     * Make the array associative
+     */
+    if($data->get('keys')){
+      $temp = array();
+      foreach ($rs as $value) {
+        $a_key = null;
+        foreach ($data->get('keys') as $value2) {
+          $a_key .= '_'.$value[$value2];
+        }
+        $a_key = substr($a_key, 1);
+        $temp[$a_key] = $value;
+      }
+      $rs = $temp;
+    }
+    /**
+     * 
+     */
+    return $rs;
   }
   public function getOne($data = array()){
     $data = new PluginWfArray($data);
