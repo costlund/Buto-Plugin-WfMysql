@@ -64,3 +64,16 @@ Replace string.
 [SESSION:user_id]
 
 
+## LIKE
+To find "Alice" in table account with LIKE search set param like to true.
+```
+sql: select name from account where name LIKE ?;
+select:
+  - name
+params:
+  -
+    type: s
+    value: lic
+    like: true 
+```
+

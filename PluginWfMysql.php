@@ -168,6 +168,16 @@ class PluginWfMysql{
       }
     }
     /**
+     * like
+     */
+    if(isset($data['params'])){
+      foreach ($data['params'] as $key => $value) {
+        if(isset($data['params'][$key]['like'])){
+          $data['params'][$key]['value'] = '%'.$data['params'][$key]['value'].'%';
+        }
+      }
+    }
+    /**
      * If param type is i and value is on we set to 1.
      * For usage when using a checkbox.
      */

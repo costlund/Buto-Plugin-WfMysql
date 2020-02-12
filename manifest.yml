@@ -1,5 +1,9 @@
-version: '1.10.3'
+version: '1.10.4'
 history:
+  '1.10.4':
+    data: '2020-02-12'
+    title: LIKE param
+    description: 'Param to make a like search.'
   '1.10.3':
     data: '2019-12-17'
     title: Param zero value
