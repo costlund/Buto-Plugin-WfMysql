@@ -1,5 +1,9 @@
-version: '1.10.4'
+version: '1.11.0'
 history:
+  '1.11.0':
+    data: '2020-05-14'
+    title: Conn param
+    description: 'Add public conn variable to be able to pick up current connection.'
   '1.10.4':
     data: '2020-02-12'
     title: LIKE param

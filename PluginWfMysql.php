@@ -16,6 +16,7 @@ class PluginWfMysql{
   private $data = array();
   public $settings = array('empty_strings_sets_to_null' => true);
   public $event = true;
+  public $conn = null;
   /**
   <p>
   A widget to test your MySql database.
@@ -33,6 +34,7 @@ class PluginWfMysql{
    */
   public function open($conn) {
     if(is_null($this->db_handler)){
+      $this->conn = $conn;
       $conn = wfSettings::getSettingsFromYmlString($conn);
       $db_handle = new mysqli(
               wfCrypt::decryptFromString($conn['server']), 
