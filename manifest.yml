@@ -1,5 +1,9 @@
-version: '1.11.0'
+version: '1.12.0'
 history:
+  '1.12.0':
+    data: '2020-10-12'
+    title: 'Server version. Affected rows.'
+    description: 'Add method get_sever_version. Add param affected_rows;'
   '1.11.0':
     data: '2020-05-14'
     title: Conn param
