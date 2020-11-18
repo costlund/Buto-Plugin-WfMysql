@@ -17,6 +17,7 @@ class PluginWfMysql{
   public $settings = array('empty_strings_sets_to_null' => true);
   public $event = true;
   public $conn = null;
+  public $affected_rows = null;
   /**
   <p>
   A widget to test your MySql database.
@@ -232,6 +233,13 @@ class PluginWfMysql{
       eval($eval);
     }
     $bool = $stmt->execute();
+    /**
+     * 
+     */
+    $this->affected_rows = mysqli_affected_rows($this->db_handler);
+    /**
+     * 
+     */
     if(!$bool){
       throw new Exception("PluginWfMysql says: ".$this->db_handler->error." (---".$data['sql']."---)!");
     }
@@ -382,5 +390,8 @@ class PluginWfMysql{
       $rs = $temp;
     }
     return new PluginWfArray($rs);
+  }
+  public function get_sever_version(){
+    return mysqli_get_server_version($this->db_handler);
   }
 }
