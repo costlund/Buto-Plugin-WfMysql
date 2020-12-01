@@ -1,5 +1,9 @@
-version: 1.12.0
+version: 1.12.1
 history:
+  1.12.1:
+    data: '2020-12-01'
+    title: 'Readme'
+    description: 'Readme improvement.'
   1.12.0:
     data: '2020-10-12'
     title: 'Server version. Affected rows.'

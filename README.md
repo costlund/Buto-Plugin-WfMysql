@@ -27,6 +27,12 @@ wf_mysql_execute_after
 wfEvent::run('wf_mysql_execute_after', array('sql_script' => $this->getSqlScript()));
 ```
 
+### Turn off event
+One can turn this off by set param event to false.
+```
+$mysql =new PluginWfMysql();
+$mysql->event = false;
+```
 
 
 ## Metods
