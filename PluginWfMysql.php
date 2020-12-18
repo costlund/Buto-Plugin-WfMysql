@@ -394,4 +394,23 @@ class PluginWfMysql{
   public function get_sever_version(){
     return mysqli_get_server_version($this->db_handler);
   }
+  public function getSqlFromFile($key, $file){
+    /**
+     * 
+     */
+    $sql = new PluginWfYml(wfGlobals::getAppDir().$file, $key);
+    /**
+     * 
+     */
+    if(strstr($sql->get('sql'), '[replace.')){
+      $replace = new PluginWfYml(wfGlobals::getAppDir().$file, 'replace');
+      foreach ($replace->get() as $key => $value) {
+        $sql->set('sql', str_replace("[replace.$key]", $value, $sql->get('sql')));
+      }
+    }
+    /**
+     * 
+     */
+    return $sql;
+  }
 }

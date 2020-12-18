@@ -83,3 +83,55 @@ params:
     like: true 
 ```
 
+## Get sql from file
+
+On could use method getSqlFromFile to get sql and also replace items.
+
+```
+$mysql =new PluginWfMysql();
+$sql = $mysql->getSqlFromFile('account', '/plugin/_some_/_plugin_/mysql/sql.yml');
+```
+Example.
+```
+account:
+  sql: select id, email from account
+  select:
+    - id
+    - email
+```
+
+### Replace in sql
+One could replace like this.
+```
+account:
+  sql: select id, [replace.test] from account
+  select:
+    - id
+    - email
+replace:
+  test: email
+```
+
+### Replace from session
+One could replace from session.
+```
+account:
+  sql: select id, email from account where id='[SESSION:user_id]'
+  select:
+    - id
+    - email
+```
+
+### Replace from get params
+One could replace from get param.
+```
+account:
+  sql: select id, email from account where id=?
+  select:
+    - id
+    - email
+  params:
+    id:
+      type: s
+      value: get:id
+```

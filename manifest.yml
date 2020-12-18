@@ -1,5 +1,9 @@
-version: 1.12.1
+version: 1.13.0
 history:
+  1.13.0:
+    data: '2020-12-18'
+    title: 'Get sql from file'
+    description: 'On could use method getSqlFromFile to get sql and also replace items.'
   1.12.1:
     data: '2020-12-01'
     title: 'Readme'
