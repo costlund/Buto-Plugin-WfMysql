@@ -122,8 +122,27 @@ account:
     - email
 ```
 
-### Replace from get params
-One could replace from get param.
+### Replace from session value (null or value)
+Query session param with null value.
+```
+account:
+  sql: select id, email from account where [SESSION_EQUAL:_some_/_param_/disabled:account.disabled]
+  select:
+    - id
+    - email
+```
+#### Result
+```
+where isnull(account.disabled)
+```
+
+Value 1 is from session param.
+```
+where account.disabled=1
+```
+
+### Get params
+One could use get param like below.
 ```
 account:
   sql: select id, email from account where id=?

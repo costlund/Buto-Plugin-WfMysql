@@ -157,6 +157,44 @@ class PluginWfMysql{
       }
     }
     /**
+     * SESSION_EQUAL
+     */
+    if(strstr($data['sql'], '[SESSION_EQUAL:')){
+      /**
+       * Get prepare data.
+       */
+      $temp = new PluginWfArray();
+      $pos = 0;
+      $session = wfUser::getSession();
+      for($i = 0; $i<substr_count($data['sql'], '[SESSION_EQUAL:'); $i++){
+        $pos = strpos($data['sql'], '[SESSION_EQUAL:', $pos+1);
+        $pos_to = strpos($data['sql'], ']', $pos+1);
+        $length = $pos_to-$pos;
+        $temp->set("$i/pos", $pos);
+        $temp->set("$i/pos_to", $pos_to);
+        $temp->set("$i/length", $length);
+        $text = substr($data['sql'], $pos, $length+1);
+        $temp->set("$i/text", $text);
+        wfPlugin::includeonce('string/array');
+        $plugin = new PluginStringArray();
+        $text = str_replace('[', '', $text);
+        $text = str_replace(']', '', $text);
+        $temp->set("$i/data", $plugin->from_char($text, ':'));
+        $temp->set("$i/value", $session->get($temp->get("$i/data/1")));
+        if(is_null($session->get($temp->get("$i/data/1")))){
+          $temp->set("$i/sql", "isnull(".$temp->get("$i/data/2").")");
+        }else{
+          $temp->set("$i/sql", $temp->get("$i/data/2")."=".$temp->get("$i/value"));
+        }
+      }
+      /**
+       * Replace
+       */
+      foreach($temp->get() as $k => $v){
+        $data['sql'] = str_replace($temp->get("$k/text"), $temp->get("$k/sql"), $data['sql']);
+      }
+    }
+    /**
      * Set get parameters.
      * Example when post id:
       params:

@@ -1,12 +1,16 @@
-version: 1.13.0
+version: 1.14.0
 history:
+  1.14.0:
+    data: '2020-12-28'
+    title: 'Replace from session value'
+    description: 'Query session param with null value.'
   1.13.0:
     data: '2020-12-18'
     title: 'Get sql from file'
     description: 'On could use method getSqlFromFile to get sql and also replace items.'
   1.12.1:
     data: '2020-12-01'
-    title: 'Readme'
+    title: Readme
     description: 'Readme improvement.'
   1.12.0:
     data: '2020-10-12'
@@ -71,6 +75,9 @@ plugin:
   -
     name: wf/array
     version: 1.2.0
+  -
+    name: string/array
+    version: '1.2'
 sys:
   -
     name: mercury
