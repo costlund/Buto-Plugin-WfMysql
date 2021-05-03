@@ -1,5 +1,9 @@
-version: 1.14.0
+version: 1.14.1
 history:
+  1.14.1:
+    data: '2021-05-03'
+    title: 'Method'
+    description: 'Method documentation.'
   1.14.0:
     data: '2020-12-28'
     title: 'Replace from session value'

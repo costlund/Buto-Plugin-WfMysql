@@ -334,7 +334,7 @@ class PluginWfMysql{
   }  
   /**
    * 
-   * @return type
+   * @return array
    */
   public function getStmtAsArray(){
     $stmt = $this->stmt;
