@@ -1,80 +1,95 @@
-version: 1.14.2
+version: 1.14.3
 history:
+  1.14.3:
+    date: '2021-08-26'
+    title: Manifest
+    description: 'Error fix in manifest.'
   1.14.2:
     date: '2021-08-26'
     title: Versions
     description: 'Versions update.'
   1.14.1:
-    data: '2021-05-03'
+    date: '2021-05-03'
     title: Method
     description: 'Method documentation.'
   1.14.0:
-    data: '2020-12-28'
+    date: '2020-12-28'
     title: 'Replace from session value'
     description: 'Query session param with null value.'
   1.13.0:
-    data: '2020-12-18'
+    date: '2020-12-18'
     title: 'Get sql from file'
     description: 'On could use method getSqlFromFile to get sql and also replace items.'
   1.12.1:
-    data: '2020-12-01'
+    date: '2020-12-01'
     title: Readme
     description: 'Readme improvement.'
   1.12.0:
-    data: '2020-10-12'
+    date: '2020-10-12'
     title: 'Server version. Affected rows.'
     description: 'Add method get_sever_version. Add param affected_rows;'
   1.11.0:
-    data: '2020-05-14'
+    date: '2020-05-14'
     title: 'Conn param'
     description: 'Add public conn variable to be able to pick up current connection.'
   1.10.4:
-    data: '2020-02-12'
+    date: '2020-02-12'
     title: 'LIKE param'
     description: 'Param to make a like search.'
   1.10.3:
-    data: '2019-12-17'
+    date: '2019-12-17'
     title: 'Param zero value'
     description: 'Bug when param values was set to NULL if zero.'
   1.10.2:
-    data: '2019-11-18'
+    date: '2019-11-18'
     title: 'Params type'
     description: 'Replace params type text.'
   1.10.1:
-    data: '2019-09-25'
+    date: '2019-09-25'
     title: 'Params bug.'
     description: 'Bug when params is an empty array.'
   1.10.0:
-    data: '2019-09-22'
+    date: '2019-09-22'
     title: 'Replace param types'
     description: 'Param types could be replaced from schema types.'
   1.9.0:
-    data: '2019-09-22'
+    date: '2019-09-22'
     description: 'Replace data in $data from $params.'
   1.8.0:
-    data: '2019-09-22'
+    date: '2019-09-22'
+    title: ''
     description: 'Set on to 1 if type is i for better usage with checkboxes.'
   1.7.0:
-    data: '2019-07-31'
+    date: '2019-07-31'
+    title: ''
     description: 'Add optional param to method getOne.'
   1.6.0:
-    data: '2019-05-04'
+    date: '2019-05-04'
+    title: ''
     description: 'Add methods getMany and getOne.'
   1.5.0:
-    data: '2019-02-26'
+    date: '2019-02-26'
+    title: ''
     description: 'Add event.'
   1.4.1:
-    data: '2019-01-31'
+    date: '2019-01-31'
+    title: ''
     description: 'Bug fix.'
   1.4.0:
-    data: '2019-01-22'
+    date: '2019-01-22'
+    title: ''
     description: 'New method to retrieve sql script where params are parsed.'
   1.3.0:
-    data: '2019-01-16'
+    date: '2019-01-16'
+    title: ''
     description: 'Improved error message.'
   1.2.0:
+    date: '2019-01-16'
+    title: ''
     description: 'Change connection failure from die to exeption.'
   1.0.0:
+    date: '2019-01-16'
+    title: ''
     description: 'First version.'
 plugin:
   -
