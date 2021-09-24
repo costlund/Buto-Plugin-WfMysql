@@ -220,12 +220,12 @@ class PluginWfMysql{
       }
     }
     /**
-     * If param type is i and value is on we set to 1.
+     * If param type is i and value is on (and not 0) we set it to 1.
      * For usage when using a checkbox.
      */
     if(isset($data['params'])){
       foreach ($data['params'] as $key => $value) {
-        if($value['type']=='i' && $value['value']=='on'){
+        if($value['type']=='i' && $value['value']=='on' && $value['value']!=0){
           $data['params'][$key]['value'] = 1;
         }
       }

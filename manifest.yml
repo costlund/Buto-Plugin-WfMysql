@@ -1,5 +1,9 @@
-version: 1.14.3
+version: 1.14.4
 history:
+  1.14.4:
+    date: '2021-09-24'
+    title: 'Param type'
+    description: 'If param type is i and value is on (and not 0) we set it to 1 in method execute.'
   1.14.3:
     date: '2021-08-26'
     title: Manifest
