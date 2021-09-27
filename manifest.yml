@@ -1,5 +1,9 @@
-version: 1.14.4
+version: 1.14.5
 history:
+  1.14.5:
+    date: '2021-09-27'
+    title: 'Exeption in runSql'
+    description: 'Replace die() with throw new Exeption() in method runSql.'
   1.14.4:
     date: '2021-09-24'
     title: 'Param type'
