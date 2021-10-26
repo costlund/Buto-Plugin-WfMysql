@@ -1,5 +1,11 @@
 # Buto-Plugin-WfMysql
-Handle MySQL queries.
+Handle MySQL queries. Set up in yml file and then use the execute method. Ur simply use runSql method with just sql script. 
+
+
+
+
+
+
 
 ## SQL
 Example of query to use in execute method.
@@ -17,12 +23,15 @@ account_email:
 ```
 
 ## Event
-
-At the end of method execute.
-
+In method execute an event is fired with current sql script. In this example we use plugin mysql/log to log queries.
 ```
-wf_mysql_execute_after
+events:
+  wf_mysql_execute_after:
+    -
+      plugin: 'mysql/log'
+      method: log
 ```
+This is what data is passing in method wfEvent:run.
 ```
 wfEvent::run('wf_mysql_execute_after', array('sql_script' => $this->getSqlScript()));
 ```
@@ -33,7 +42,6 @@ One can turn this off by set param event to false.
 $mysql =new PluginWfMysql();
 $mysql->event = false;
 ```
-
 
 ## Metods
 

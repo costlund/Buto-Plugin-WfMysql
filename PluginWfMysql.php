@@ -226,7 +226,7 @@ class PluginWfMysql{
      */
     if(isset($data['params'])){
       foreach ($data['params'] as $key => $value) {
-        if($value['type']=='i' && $value['value']=='on' && $value['value']!=0){
+        if($value['type']=='i' && $value['value']=='on'){
           $data['params'][$key]['value'] = 1;
         }
       }
@@ -256,6 +256,7 @@ class PluginWfMysql{
           }
         }
       }
+      //wfHelp::yml_dump($data);
       /**
        * 
        */
