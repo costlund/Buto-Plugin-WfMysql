@@ -1,5 +1,9 @@
-version: 1.14.6
+version: 1.14.7
 history:
+  1.14.7:
+    date: '2022-05-19'
+    title: 'Code'
+    description: 'Improvement in code.'
   1.14.6:
     date: '2021-10-26'
     title: 'Param type'

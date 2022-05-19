@@ -256,7 +256,6 @@ class PluginWfMysql{
           }
         }
       }
-      //wfHelp::yml_dump($data);
       /**
        * 
        */
@@ -341,6 +340,7 @@ class PluginWfMysql{
   public function getStmtAsArray(){
     $stmt = $this->stmt;
     $data = $this->data;
+    $result = array();
     if(isset($data['select'])){
       /**
        * Bind result to variables.
