@@ -45,6 +45,19 @@ $mysql->event = false;
 
 ## Metods
 
+### conn
+Connection.
+```
+server: '_ip_or_domain_'
+database: '_name_of_db_'
+user_name: '_user_name_'
+password: '_pw_'
+```
+Set PHP time zone (optional).
+```
+set_php_time_zone: true
+```
+
 ### execute
 Execute sql. One could add params to replace data. The "get:" prefix will also be replaced by wfReguest params.
 

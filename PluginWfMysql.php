@@ -49,8 +49,23 @@ class PluginWfMysql{
       }
       $this->db_handler = $db_handle;
       $this->execute(array('sql' => "SET CHARACTER SET utf8"));
+      /**
+       * time zone
+       */
+      if($conn->get('set_php_time_zone')){
+        $this->execute(array('sql' => "SET time_zone='".$this->get_time_zone()."'"));
+      }
     }
     return true;
+  }
+  private function get_time_zone(){
+    $now = new DateTime();
+    $mins = $now->getOffset() / 60;
+    $sgn = ($mins < 0 ? -1 : 1);
+    $mins = abs($mins);
+    $hrs = floor($mins / 60);
+    $mins -= $hrs * 60;
+    return sprintf('%+d:%02d', $hrs*$sgn, $mins);
   }
   /**
    * Run a query and return result in an array.

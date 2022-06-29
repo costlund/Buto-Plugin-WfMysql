@@ -1,5 +1,9 @@
-version: 1.14.7
+version: 1.14.8
 history:
+  1.14.8:
+    date: '2022-06-29'
+    title: 'Time zone'
+    description: 'Set time zone from globals.'
   1.14.7:
     date: '2022-05-19'
     title: 'Code'
