@@ -152,6 +152,18 @@ account:
     - id
     - email
 ```
+
+### Replace param
+```
+account:
+  sql: select id, email from account where [email]
+  replace:
+    email: "email='me@world.com'"
+  select:
+    - id
+    - email
+```
+
 #### Result
 ```
 where isnull(account.disabled)

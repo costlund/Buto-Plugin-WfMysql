@@ -118,6 +118,14 @@ class PluginWfMysql{
    */
   public function execute($data, $params = array()){
     /**
+     * replace
+     */
+    if(isset($data['replace'])){
+      foreach($data['replace'] as $k => $v){
+        $data['sql'] = str_replace('['.$k.']', $v, $data['sql']);
+      }
+    }
+    /**
      * 
      */
     if(!isset($data['sql'])){return false;}
