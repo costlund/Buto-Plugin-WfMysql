@@ -122,7 +122,7 @@ class PluginWfMysql{
      */
     if(isset($data['replace'])){
       foreach($data['replace'] as $k => $v){
-        $data['sql'] = str_replace('['.$k.']', $v, $data['sql']);
+        $data['sql'] = wfPhpfunc::str_replace('['.$k.']', $v, $data['sql']);
       }
     }
     /**
@@ -134,19 +134,19 @@ class PluginWfMysql{
      */
     if(isset($data['params'])){
       foreach ($data['params'] as $key => $value) {
-        if(strstr($data['params'][$key]['type'], 'varchar')){
+        if(wfPhpfunc::strstr($data['params'][$key]['type'], 'varchar')){
           $data['params'][$key]['type'] = 's';
-        }elseif(strstr($data['params'][$key]['type'], 'text')){
+        }elseif(wfPhpfunc::strstr($data['params'][$key]['type'], 'text')){
           $data['params'][$key]['type'] = 's';
-        }elseif(strstr($data['params'][$key]['type'], 'date')){
+        }elseif(wfPhpfunc::strstr($data['params'][$key]['type'], 'date')){
           $data['params'][$key]['type'] = 's';
-        }elseif(strstr($data['params'][$key]['type'], 'enum')){
+        }elseif(wfPhpfunc::strstr($data['params'][$key]['type'], 'enum')){
           $data['params'][$key]['type'] = 's';
-        }elseif(strstr($data['params'][$key]['type'], 'timestamp')){
+        }elseif(wfPhpfunc::strstr($data['params'][$key]['type'], 'timestamp')){
           $data['params'][$key]['type'] = 's';
-        }elseif(strstr($data['params'][$key]['type'], 'int')){
+        }elseif(wfPhpfunc::strstr($data['params'][$key]['type'], 'int')){
           $data['params'][$key]['type'] = 'i';
-        }elseif(strstr($data['params'][$key]['type'], 'double')){
+        }elseif(wfPhpfunc::strstr($data['params'][$key]['type'], 'double')){
           $data['params'][$key]['type'] = 'd';
         }
       }
@@ -164,26 +164,26 @@ class PluginWfMysql{
     /**
      * Replace [user_id].
      */
-    if(strstr($data['sql'], '[user_id]')){
+    if(wfPhpfunc::strstr($data['sql'], '[user_id]')){
       $user = wfUser::getSession();
-      $data['sql'] = str_replace('[user_id]', $user->get('user_id'), $data['sql']);
+      $data['sql'] = wfPhpfunc::str_replace('[user_id]', $user->get('user_id'), $data['sql']);
     }
     /**
      * Replace all session variables.
      */
-    if(strstr($data['sql'], '[SESSION:')){
+    if(wfPhpfunc::strstr($data['sql'], '[SESSION:')){
       wfPlugin::includeonce('wf/arraysearch');
       $search = new PluginWfArraysearch(true);
       $session = wfUser::getSession();
       $search->data = array('data' => $session->get());
       foreach ($search->get() as $key => $value) {
-        $data['sql'] = str_replace('[SESSION:'.substr($value, 1).']', $session->get(substr($value, 1)), $data['sql']);
+        $data['sql'] = wfPhpfunc::str_replace('[SESSION:'.wfPhpfunc::substr($value, 1).']', $session->get(wfPhpfunc::substr($value, 1)), $data['sql']);
       }
     }
     /**
      * SESSION_EQUAL
      */
-    if(strstr($data['sql'], '[SESSION_EQUAL:')){
+    if(wfPhpfunc::strstr($data['sql'], '[SESSION_EQUAL:')){
       /**
        * Get prepare data.
        */
@@ -197,12 +197,12 @@ class PluginWfMysql{
         $temp->set("$i/pos", $pos);
         $temp->set("$i/pos_to", $pos_to);
         $temp->set("$i/length", $length);
-        $text = substr($data['sql'], $pos, $length+1);
+        $text = wfPhpfunc::substr($data['sql'], $pos, $length+1);
         $temp->set("$i/text", $text);
         wfPlugin::includeonce('string/array');
         $plugin = new PluginStringArray();
-        $text = str_replace('[', '', $text);
-        $text = str_replace(']', '', $text);
+        $text = wfPhpfunc::str_replace('[', '', $text);
+        $text = wfPhpfunc::str_replace(']', '', $text);
         $temp->set("$i/data", $plugin->from_char($text, ':'));
         $temp->set("$i/value", $session->get($temp->get("$i/data/1")));
         if(is_null($session->get($temp->get("$i/data/1")))){
@@ -215,7 +215,7 @@ class PluginWfMysql{
        * Replace
        */
       foreach($temp->get() as $k => $v){
-        $data['sql'] = str_replace($temp->get("$k/text"), $temp->get("$k/sql"), $data['sql']);
+        $data['sql'] = wfPhpfunc::str_replace($temp->get("$k/text"), $temp->get("$k/sql"), $data['sql']);
       }
     }
     /**
@@ -228,8 +228,8 @@ class PluginWfMysql{
      */
     if(isset($data['params'])){
       foreach ($data['params'] as $key => $value) {
-        if(substr($value['value'], 0, 4) == 'get:'){
-          $data['params'][$key]['value'] = wfRequest::get(substr($value['value'], 4));
+        if(wfPhpfunc::substr($value['value'], 0, 4) == 'get:'){
+          $data['params'][$key]['value'] = wfRequest::get(wfPhpfunc::substr($value['value'], 4));
         }
       }
     }
@@ -257,9 +257,9 @@ class PluginWfMysql{
     /**
      * Replace [remote_addr].
      */
-    if(strstr($data['sql'], '[remote_addr]')){
+    if(wfPhpfunc::strstr($data['sql'], '[remote_addr]')){
       $server = new PluginWfArray($_SERVER);
-      $data['sql'] = str_replace('[remote_addr]', $server->get('REMOTE_ADDR'), $data['sql']);
+      $data['sql'] = wfPhpfunc::str_replace('[remote_addr]', $server->get('REMOTE_ADDR'), $data['sql']);
     }
     /**
      * 
@@ -352,7 +352,7 @@ class PluginWfMysql{
   private function str_replace_first($search, $replace, $subject) {
     $pos = strpos($subject, $search);
     if ($pos !== false) {
-      return substr_replace($subject, $replace, $pos, strlen($search));
+      return substr_replace($subject, $replace, $pos, wfPhpfunc::strlen($search));
     }
     return $subject;
   }  
@@ -372,7 +372,7 @@ class PluginWfMysql{
       foreach ($data['select'] as $key => $value) {
         $eval .= '$result["'.$value.'"],';
       }
-      $eval = substr($eval, 0, strlen($eval)-1);
+      $eval = wfPhpfunc::substr($eval, 0, wfPhpfunc::strlen($eval)-1);
       $eval .= ');';
       eval($eval);
       /**
@@ -431,7 +431,7 @@ class PluginWfMysql{
         foreach ($data->get('keys') as $value2) {
           $a_key .= '_'.$value[$value2];
         }
-        $a_key = substr($a_key, 1);
+        $a_key = wfPhpfunc::substr($a_key, 1);
         $temp[$a_key] = $value;
       }
       $rs = $temp;
@@ -465,10 +465,10 @@ class PluginWfMysql{
     /**
      * 
      */
-    if(strstr($sql->get('sql'), '[replace.')){
+    if(wfPhpfunc::strstr($sql->get('sql'), '[replace.')){
       $replace = new PluginWfYml(wfGlobals::getAppDir().$file, 'replace');
       foreach ($replace->get() as $key => $value) {
-        $sql->set('sql', str_replace("[replace.$key]", $value, $sql->get('sql')));
+        $sql->set('sql', wfPhpfunc::str_replace("[replace.$key]", $value, $sql->get('sql')));
       }
     }
     /**
