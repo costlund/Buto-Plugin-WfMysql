@@ -1,5 +1,9 @@
-version: 1.17.1
+version: 1.17.2
 history:
+  1.17.2:
+    date: '2024-01-04'
+    title: Crypt
+    description: 'Using plugin crypt/openssl for crypted params.'
   1.17.1:
     date: '2023-09-11'
     title: Versions
@@ -141,6 +145,9 @@ plugin:
   -
     name: string/array
     version: 1.4.0
+  -
+    name: crypt/openssl
+    version: 1.1.0
 sys:
   -
     name: mercury

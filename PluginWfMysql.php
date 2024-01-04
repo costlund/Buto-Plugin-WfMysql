@@ -38,11 +38,13 @@ class PluginWfMysql{
       $this->conn = $conn;
       $conn = wfSettings::getSettingsFromYmlString($conn);
       $conn = new PluginWfArray($conn);
+      wfPlugin::includeonce('crypt/openssl');
+      $crypt = new PluginCryptOpenssl();
       $db_handle = new mysqli(
-              wfCrypt::decryptFromString($conn->get('server')), 
-              wfCrypt::decryptFromString($conn->get('user_name')), 
-              wfCrypt::decryptFromString($conn->get('password')), 
-              wfCrypt::decryptFromString($conn->get('database'))
+        $crypt->decrypt_from_key($conn->get('server')), 
+        $crypt->decrypt_from_key($conn->get('user_name')), 
+        $crypt->decrypt_from_key($conn->get('password')), 
+        $crypt->decrypt_from_key($conn->get('database'))
               );
       if ($db_handle->connect_error) {
         throw new Exception(__CLASS__."says: Could not connect to server ".$conn->get('server').".");
