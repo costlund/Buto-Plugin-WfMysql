@@ -1,0 +1,179 @@
+readme:
+  name: Buto-Plugin-WfMysql
+  description: |
+    Handle MySQL queries. Set up in yml file and then use the execute method. Ur simply use runSql method with just sql script. 
+  item:
+    -
+      name: Settings
+      item:
+        -
+          name: SQL
+          description: |
+            Example of query to use in execute method.
+            ```
+            account_email:
+              sql: |
+                SELECT email from account where id=?;
+              select:
+                - email
+              params:
+                -
+                  type: s
+                  value: get:id
+            ```
+          item:
+            -
+              name: LIKE
+              description: |
+                To find "Alice" in table account with LIKE search set param like to true.
+                ```
+                sql: select name from account where name LIKE ?;
+                select:
+                  - name
+                params:
+                  -
+                    type: s
+                    value: lic
+                    like: true 
+                ```
+            -
+              name: Get sql from file
+              description: |
+                On could use method getSqlFromFile to get sql and also replace items.
+                ```
+                $mysql =new PluginWfMysql();
+                $sql = $mysql->getSqlFromFile('account', '/plugin/_some_/_plugin_/mysql/sql.yml');
+                ```
+                Example.
+                ```
+                account:
+                  sql: select id, email from account
+                  select:
+                    - id
+                    - email
+    -
+      name: Events
+      item:
+        -
+          name: wf_mysql_execute_after
+          description: |
+            In method execute an event is fired with current sql script. In this example we use plugin mysql/log to log queries.
+            ```
+            events:
+              wf_mysql_execute_after:
+                -
+                  plugin: 'mysql/log'
+                  method: log
+            ```
+            This is what data is passing in method wfEvent:run.
+            ```
+            wfEvent::run('wf_mysql_execute_after', array('sql_script' => $this->getSqlScript()));
+            ```
+            One can turn this off by set param event to false.
+            ```
+            $mysql =new PluginWfMysql();
+            $mysql->event = false;
+            ```
+    -
+      name: Methods
+      item:
+        -
+          name: conn
+          description: |
+            Connection.
+            ```
+            server: '_ip_or_domain_'
+            database: '_name_of_db_'
+            user_name: '_user_name_'
+            password: '_pw_'
+            ```
+            Set PHP time zone (optional).
+            ```
+            set_php_time_zone: true
+            ```
+            One could crypt values if theme file /config/crypt.yml exist.
+            Read more how to crypt in readme for plugin crypt/openssl.
+            ```
+            password: 'crypt:_my_crypted_pw_'
+            ```
+        -
+          name: execute
+          description: |
+            Execute sql. One could add params to replace data. The "get:" prefix will also be replaced by wfReguest params.
+            ```
+            array('get' => array('id' => '1234'))
+            ```
+        -
+          name: getOne
+          description: |
+            Get one record as PluginWfArray object. Add optional sql data to fill result with empty params.
+            ```
+            $rs = $plugin_wf_mysql->getOne(array('sql' => $sql->get()));
+            ```
+        -
+          name: getMany
+          description: |
+            Get records i array.
+            ```
+            $rs = $plugin_wf_mysql->getMany();
+            ```
+    -
+      name: Replace
+      description: |
+        Replace string.
+      item:
+        -
+          name: Replace in sql
+          description: |
+            One could replace like this.
+            ```
+            account:
+              sql: select id, [replace.test] from account
+              select:
+                - id
+                - email
+            replace:
+              test: email
+            ```
+        -
+          name: Replace param
+          description: |
+            ```
+            account:
+              sql: select id, email from account where [email]
+              replace:
+                email: "email='me@world.com'"
+              select:
+                - id
+                - email
+            ```
+        -
+          name: user_id
+          description: |
+            [user_id] will be replaced by param session user_id.
+        -
+          name: remote_addr
+          description: |
+            [remote_addr] from server variable.
+        -
+          name: Session
+          description: |
+            Any session param.
+            ```
+            [SESSION:user_id]
+            ```
+            ```
+            account:
+              sql: select id, email from account where id='[SESSION:user_id]'
+              select:
+                - id
+                - email
+            ```
+            Query session param with null value.
+            ```
+            account:
+              sql: select id, email from account where [SESSION_EQUAL:_some_/_param_/disabled:account.disabled]
+              select:
+                - id
+                - email
+            ```
