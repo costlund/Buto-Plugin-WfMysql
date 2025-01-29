@@ -45,8 +45,7 @@ params:
 <pre><code>$mysql =new PluginWfMysql();
 $sql = $mysql-&gt;getSqlFromFile('account', '/plugin/_some_/_plugin_/mysql/sql.yml');</code></pre>
 <p>Example.</p>
-<pre><code>
-account:
+<pre><code>account:
   sql: select id, email from account
   select:
     - id
@@ -176,4 +175,13 @@ replace:
   select:
     - id
     - email</code></pre>
+
+<a name="key_4"></a>
+
+## Known issues
+
+<p>When to load sql from file and the file is parsed by server this could happen.</p>
+<pre><code>Parse error: Unmatched ')' in ../sql.yml on line 888</code></pre>
+<p>This statement could cause this.</p>
+<pre><code>sql: select number from my_table where number&lt;?</code></pre>
 

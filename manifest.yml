@@ -1,5 +1,9 @@
-version: 1.17.3
+version: 1.17.4
 history:
+  1.17.4:
+    date: '2025-01-29'
+    title: Readme
+    description: 'Improvements.'
   1.17.3:
     date: '2024-01-04'
     title: Readme

@@ -51,6 +51,7 @@ readme:
                   select:
                     - id
                     - email
+                ```
     -
       name: Events
       item:
@@ -177,3 +178,14 @@ readme:
                 - id
                 - email
             ```
+    -
+      name: Known issues
+      description: |
+        When to load sql from file and the file is parsed by server this could happen.
+        ```
+        Parse error: Unmatched ')' in ../sql.yml on line 888
+        ```
+        This statement could cause this.
+        ```
+        sql: select number from my_table where number<?
+        ```
