@@ -118,6 +118,21 @@ readme:
             ```
             $rs = $plugin_wf_mysql->getMany();
             ```
+        -
+          name: runSQL
+          description: |
+            Run a query and return result in an array.
+            ```
+            $rs = $this->mysql->runSql($sql);
+            ```
+            Set keys from id.
+            ```
+            $rs = $this->mysql->runSql($sql, 'id');
+            ```
+            Never set keys from anything.
+            ```
+            $rs = $this->mysql->runSql($sql, false);
+            ```
     -
       name: Replace
       description: |

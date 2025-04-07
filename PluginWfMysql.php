@@ -72,7 +72,7 @@ class PluginWfMysql{
   /**
    * Run a query and return result in an array.
    * @param string $sql
-   * @param string $key_field
+   * @param string $key_field (set to false to never render keys)
    * @return array
    */
   public function runSql($sql, $key_field = 'id'){
