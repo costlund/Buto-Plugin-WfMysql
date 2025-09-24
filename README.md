@@ -115,6 +115,17 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 <p>Get records i array.</p>
 <pre><code>$rs = $plugin_wf_mysql-&gt;getMany();</code></pre>
 
+<a name="key_2_4"></a>
+
+### runSQL
+
+<p>Run a query and return result in an array.</p>
+<pre><code>$rs = $this-&gt;mysql-&gt;runSql($sql);</code></pre>
+<p>Set keys from id.</p>
+<pre><code>$rs = $this-&gt;mysql-&gt;runSql($sql, 'id');</code></pre>
+<p>Never set keys from anything.</p>
+<pre><code>$rs = $this-&gt;mysql-&gt;runSql($sql, false);</code></pre>
+
 <a name="key_3"></a>
 
 ## Replace
