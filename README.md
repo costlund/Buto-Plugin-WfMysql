@@ -8,9 +8,13 @@
 
 
 
+
+
 <a name="key_0_0"></a>
 
 ### SQL
+
+
 
 <p>Example of query to use in execute method.</p>
 <pre><code>account_email:
@@ -27,6 +31,8 @@
 
 #### LIKE
 
+
+
 <p>To find "Alice" in table account with LIKE search set param like to true.</p>
 <pre><code>sql: select name from account where name LIKE ?;
 select:
@@ -40,6 +46,8 @@ params:
 <a name="key_0_0_1"></a>
 
 #### Get sql from file
+
+
 
 <p>On could use method getSqlFromFile to get sql and also replace items.</p>
 <pre><code>$mysql =new PluginWfMysql();
@@ -57,9 +65,13 @@ $sql = $mysql-&gt;getSqlFromFile('account', '/plugin/_some_/_plugin_/mysql/sql.y
 
 
 
+
+
 <a name="key_1_0"></a>
 
 ### wf_mysql_execute_after
+
+
 
 <p>In method execute an event is fired with current sql script. In this example we use plugin mysql/log to log queries.</p>
 <pre><code>events:
@@ -79,9 +91,13 @@ $mysql-&gt;event = false;</code></pre>
 
 
 
+
+
 <a name="key_2_0"></a>
 
 ### conn
+
+
 
 <p>Connection.</p>
 <pre><code>server: '_ip_or_domain_'
@@ -98,12 +114,16 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 
 ### execute
 
+
+
 <p>Execute sql. One could add params to replace data. The "get:" prefix will also be replaced by wfReguest params.</p>
 <pre><code>array('get' =&gt; array('id' =&gt; '1234'))</code></pre>
 
 <a name="key_2_2"></a>
 
 ### getOne
+
+
 
 <p>Get one record as PluginWfArray object. Add optional sql data to fill result with empty params.</p>
 <pre><code>$rs = $plugin_wf_mysql-&gt;getOne(array('sql' =&gt; $sql-&gt;get()));</code></pre>
@@ -112,12 +132,16 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 
 ### getMany
 
+
+
 <p>Get records i array.</p>
 <pre><code>$rs = $plugin_wf_mysql-&gt;getMany();</code></pre>
 
 <a name="key_2_4"></a>
 
 ### runSQL
+
+
 
 <p>Run a query and return result in an array.</p>
 <pre><code>$rs = $this-&gt;mysql-&gt;runSql($sql);</code></pre>
@@ -130,11 +154,15 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 
 ## Replace
 
+
+
 <p>Replace string.</p>
 
 <a name="key_3_0"></a>
 
 ### Replace in sql
+
+
 
 <p>One could replace like this.</p>
 <pre><code>account:
@@ -149,6 +177,8 @@ replace:
 
 ### Replace param
 
+
+
 <pre><code>account:
   sql: select id, email from account where [email]
   replace:
@@ -161,17 +191,23 @@ replace:
 
 ### user_id
 
+
+
 <p>[user_id] will be replaced by param session user_id.</p>
 
 <a name="key_3_3"></a>
 
 ### remote_addr
 
+
+
 <p>[remote_addr] from server variable.</p>
 
 <a name="key_3_4"></a>
 
 ### Session
+
+
 
 <p>Any session param.</p>
 <pre><code>[SESSION:user_id]</code></pre>
@@ -190,6 +226,8 @@ replace:
 <a name="key_4"></a>
 
 ## Known issues
+
+
 
 <p>When to load sql from file and the file is parsed by server this could happen.</p>
 <pre><code>Parse error: Unmatched ')' in ../sql.yml on line 888</code></pre>
