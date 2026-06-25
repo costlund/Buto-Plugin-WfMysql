@@ -30,6 +30,10 @@ class PluginWfMysql{
     wfHelp::yml_dump($data);
     wfHelp::yml_dump($result);
   }
+  public function close(){
+    $this->db_handler = null;
+    return null;
+  }
   /**
    * Get db object.
    */

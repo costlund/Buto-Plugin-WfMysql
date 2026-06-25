@@ -1,5 +1,9 @@
-version: 1.17.4
+version: 1.18.0
 history:
+  1.18.0:
+    date: '2026-06-25'
+    title: Close
+    description: 'Add close method.'
   1.17.4:
     date: '2025-01-29'
     title: Readme

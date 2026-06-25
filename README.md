@@ -61,13 +61,30 @@ $sql = $mysql-&gt;getSqlFromFile('account', '/plugin/_some_/_plugin_/mysql/sql.y
 
 <a name="key_1"></a>
 
+## Example
+
+
+
+<pre><code>$mysql =new PluginWfMysql();
+$mysql-&gt;open(array());
+$mysql-&gt;execute(
+  array(
+    'sql'    =&gt; 'select id, email from account where email=?',
+    'params' =&gt; [['type' =&gt; 's', 'value' =&gt; 'me@world.com']],
+    'select' =&gt; ['id', 'email']
+  )
+);
+return $mysql-&gt;getOne();</code></pre>
+
+<a name="key_2"></a>
+
 ## Events
 
 
 
 
 
-<a name="key_1_0"></a>
+<a name="key_2_0"></a>
 
 ### wf_mysql_execute_after
 
@@ -85,7 +102,7 @@ $sql = $mysql-&gt;getSqlFromFile('account', '/plugin/_some_/_plugin_/mysql/sql.y
 <pre><code>$mysql =new PluginWfMysql();
 $mysql-&gt;event = false;</code></pre>
 
-<a name="key_2"></a>
+<a name="key_3"></a>
 
 ## Methods
 
@@ -93,7 +110,7 @@ $mysql-&gt;event = false;</code></pre>
 
 
 
-<a name="key_2_0"></a>
+<a name="key_3_0"></a>
 
 ### conn
 
@@ -110,7 +127,15 @@ password: '_pw_'</code></pre>
 Read more how to crypt in readme for plugin crypt/openssl.</p>
 <pre><code>password: 'crypt:_my_crypted_pw_'</code></pre>
 
-<a name="key_2_1"></a>
+<a name="key_3_1"></a>
+
+### close
+
+
+
+<p>Unset connections so a new one can be established.</p>
+
+<a name="key_3_2"></a>
 
 ### execute
 
@@ -119,7 +144,7 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 <p>Execute sql. One could add params to replace data. The "get:" prefix will also be replaced by wfReguest params.</p>
 <pre><code>array('get' =&gt; array('id' =&gt; '1234'))</code></pre>
 
-<a name="key_2_2"></a>
+<a name="key_3_3"></a>
 
 ### getOne
 
@@ -128,7 +153,7 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 <p>Get one record as PluginWfArray object. Add optional sql data to fill result with empty params.</p>
 <pre><code>$rs = $plugin_wf_mysql-&gt;getOne(array('sql' =&gt; $sql-&gt;get()));</code></pre>
 
-<a name="key_2_3"></a>
+<a name="key_3_4"></a>
 
 ### getMany
 
@@ -137,7 +162,7 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 <p>Get records i array.</p>
 <pre><code>$rs = $plugin_wf_mysql-&gt;getMany();</code></pre>
 
-<a name="key_2_4"></a>
+<a name="key_3_5"></a>
 
 ### runSQL
 
@@ -150,7 +175,7 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 <p>Never set keys from anything.</p>
 <pre><code>$rs = $this-&gt;mysql-&gt;runSql($sql, false);</code></pre>
 
-<a name="key_3"></a>
+<a name="key_4"></a>
 
 ## Replace
 
@@ -158,7 +183,7 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 
 <p>Replace string.</p>
 
-<a name="key_3_0"></a>
+<a name="key_4_0"></a>
 
 ### Replace in sql
 
@@ -173,7 +198,7 @@ Read more how to crypt in readme for plugin crypt/openssl.</p>
 replace:
   test: email</code></pre>
 
-<a name="key_3_1"></a>
+<a name="key_4_1"></a>
 
 ### Replace param
 
@@ -187,7 +212,7 @@ replace:
     - id
     - email</code></pre>
 
-<a name="key_3_2"></a>
+<a name="key_4_2"></a>
 
 ### user_id
 
@@ -195,7 +220,7 @@ replace:
 
 <p>[user_id] will be replaced by param session user_id.</p>
 
-<a name="key_3_3"></a>
+<a name="key_4_3"></a>
 
 ### remote_addr
 
@@ -203,7 +228,7 @@ replace:
 
 <p>[remote_addr] from server variable.</p>
 
-<a name="key_3_4"></a>
+<a name="key_4_4"></a>
 
 ### Session
 
@@ -223,7 +248,7 @@ replace:
     - id
     - email</code></pre>
 
-<a name="key_4"></a>
+<a name="key_5"></a>
 
 ## Known issues
 

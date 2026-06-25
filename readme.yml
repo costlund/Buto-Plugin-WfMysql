@@ -53,6 +53,21 @@ readme:
                     - email
                 ```
     -
+      name: Example
+      description: |
+        ```
+        $mysql =new PluginWfMysql();
+        $mysql->open(array());
+        $mysql->execute(
+          array(
+            'sql'    => 'select id, email from account where email=?',
+            'params' => [['type' => 's', 'value' => 'me@world.com']],
+            'select' => ['id', 'email']
+          )
+        );
+        return $mysql->getOne();
+        ```
+    -
       name: Events
       item:
         -
@@ -97,6 +112,11 @@ readme:
             ```
             password: 'crypt:_my_crypted_pw_'
             ```
+        -
+          name: close
+          date: '2026-06-25'
+          description: |
+            Unset connections so a new one can be established.
         -
           name: execute
           description: |
